@@ -10,12 +10,14 @@ WORKDIR /app
 
 RUN mkdir /opt/oracle
 
-COPY instantclient-basic-linux.x64-11.2.0.4.0.zip /opt/oracle/instantclient-basic-linux.x64-11.2.0.4.0.zip
+# COPY instantclient-basic-linux.x64-11.2.0.4.0.zip /opt/oracle/instantclient-basic-linux.x64-11.2.0.4.0.zip
+
 
 # Clean and update
 RUN apt-get update -y 
 
-RUN apt-get install -y  unzip libaio1 build-essential  python-dev \
+RUN apt-get install -y  unzip libaio1 build-essential  python-dev curl \
+    && curl -SL   https://download.oracle.com/otn/linux/instantclient/11204/instantclient-basic-linux.x64-11.2.0.4.0.zip?AuthParam=1680856287_57d80eced3d744f753446140c69a96a2  -o /opt/oracle/instantclient-basic-linux.x64-11.2.0.4.0.zip \
     && cd /opt/oracle/ \
     && unzip  instantclient-basic-linux.x64-11.2.0.4.0.zip \
     && cd /opt/oracle/instantclient_11_2 \
