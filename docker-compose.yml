@@ -1,0 +1,20 @@
+version: "2.0"
+services:
+  miniconda_eda:
+    image: miniconda_eda
+    volumes:
+      - ./:/app
+
+    command:
+      - /bin/sh
+      - -c
+      - |
+        export PATH=/opt/conda/bin:$PATH
+        # 启动jupyter notebook
+        jupyter notebook --notebook-dir=/app/notebooks --ip='*' --port=8888 --no-browser  --allow-root --NotebookApp.password='sha1:bf8f89981095:2b0b242b19e52b88e9b9f512924d6753cb67325d'
+        # password abc123%
+
+    ports:
+      - 8889:8888
+    working_dir: /app
+
